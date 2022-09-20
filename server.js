@@ -48,6 +48,9 @@ app.post('/api', (req, res) => {
     data[index].p1 = req.body.p1
     data[index].p2 = req.body.p2
     data[index].on = JSON.parse(req.body.on)
+    res.json(
+        data.filter(x => x.CreatedBy === data[index].CreatedBy)
+    )
     model.findOneAndUpdate({ID: req.body.ID}, {...data[index]})
         .then(console.log)
 })
