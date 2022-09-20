@@ -5,8 +5,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   height: 10vh;
-  margin: 10%;
-  width: 80vw;
+  margin: 3%;
+  width: 60vw;
 }
 .card label {
   color: #fff;
@@ -45,6 +45,7 @@
 @media (max-width: 800px) {
   .card {
     width: 80vw;
+    margin: 10%;
   }
 }
 * {
