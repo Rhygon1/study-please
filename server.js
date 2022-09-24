@@ -87,3 +87,7 @@ app.get('/reconnect', (req, res) => {
         .then(d => data = d)
     res.json(data)
 })
+
+app.get('/check', (req, res) => {
+    res.json(data)
+})
