@@ -37,12 +37,18 @@ app.get('/api/:name', (req, res) => {
 })
 
 app.post('/api', (req, res) => {
-    let index = 0
+    let index = -1
     for(let i = 0; i<data.length; i++){
         if(data[i].ID == req.body.ID){
             index = i
             break
         }
+    }
+    if(index < 0){
+        res.json(
+            data.filter(x => x.CreatedBy === data[index].CreatedBy)
+        )
+        return 
     }
     data[index].User = req.body.User
     data[index].p1 = req.body.p1
@@ -51,17 +57,24 @@ app.post('/api', (req, res) => {
     res.json(
         data.filter(x => x.CreatedBy === data[index].CreatedBy)
     )
+
     model.findOneAndUpdate({ID: req.body.ID}, {...data[index]})
         .then(console.log)
 })
 
 app.delete('/api', (req, res) => {
-    let index = 0
+    let index = -1
     for(let i = 0; i<data.length; i++){
         if(data[i].ID == req.body.ID){
             index = i
             break
         }
+    }
+    if(index < 0){
+        res.json(
+            data.filter(x => x.CreatedBy === data[index].CreatedBy)
+        )
+        return 
     }
     let name = data[index].CreatedBy
     data.splice(index, 1)
