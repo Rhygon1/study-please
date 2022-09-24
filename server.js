@@ -83,9 +83,9 @@ app.put('/api', (req, res) => {
 })
 
 app.get('/reconnect', (req, res) => {
+    res.json(data)
     model.find({}).exec()
         .then(d => data = d)
-    res.json(data)
 })
 
 app.get('/check', (req, res) => {
