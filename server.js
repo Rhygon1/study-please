@@ -49,17 +49,18 @@ app.post('/api', (req, res) => {
             data.filter(x => x.CreatedBy === data[index].CreatedBy)
         )
         return 
+    } else {
+        data[index].User = req.body.User
+        data[index].p1 = req.body.p1
+        data[index].p2 = req.body.p2
+        data[index].on = JSON.parse(req.body.on)
+        res.json(
+            data.filter(x => x.CreatedBy === data[index].CreatedBy)
+        )
+    
+        model.findOneAndUpdate({ID: req.body.ID}, {...data[index]})
+            .then(console.log)
     }
-    data[index].User = req.body.User
-    data[index].p1 = req.body.p1
-    data[index].p2 = req.body.p2
-    data[index].on = JSON.parse(req.body.on)
-    res.json(
-        data.filter(x => x.CreatedBy === data[index].CreatedBy)
-    )
-
-    model.findOneAndUpdate({ID: req.body.ID}, {...data[index]})
-        .then(console.log)
 })
 
 app.delete('/api', (req, res) => {
@@ -75,15 +76,16 @@ app.delete('/api', (req, res) => {
             data.filter(x => x.CreatedBy === data[index].CreatedBy)
         )
         return 
+    } else {
+        let name = data[index].CreatedBy
+        data.splice(index, 1)
+        res.json(
+            data.filter(x => x.CreatedBy === name)
+        )
+    
+        model.deleteOne({ID: req.body.ID})
+            .then(console.log)
     }
-    let name = data[index].CreatedBy
-    data.splice(index, 1)
-    res.json(
-        data.filter(x => x.CreatedBy === name)
-    )
-
-    model.deleteOne({ID: req.body.ID})
-        .then(console.log)
 })
 
 app.put('/api', (req, res) => {
